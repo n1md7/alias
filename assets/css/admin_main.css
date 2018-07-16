@@ -1,0 +1,23 @@
+@font-face {
+    font-family: kafont;
+    src: url('../fonts/fontka.ttf');
+}
+
+.hidden{
+	display: none;
+}
+.overflow-auto{
+	overflow: auto;
+}
+.lang{
+	font-family: 'kafont';
+}
+
+.bg-body{
+	background: #8e9091 !important;
+}
+
+
+.swal-text{
+  text-align: center;
+}
