@@ -1,0 +1,1 @@
+var Team = function(){};
