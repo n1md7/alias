@@ -487,7 +487,7 @@ game.fullReset = function(confirm = true) {
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<div class="input-group-text bg-danger border-0 rounded-0">
-									<input type="checkbox" id="dict${el.cat_id}" class="js-dict-names" ${ix==0?'checked="true"':''} data-name="${el.cat_name}" data-id="${el.cat_id}">
+									<input type="checkbox" id="dict${el.cat_id}" class="js-dict-names" checked="true" data-name="${el.cat_name}" data-id="${el.cat_id}">
 								</div>
 							</div>
 							<button class="btn rounded-0 btn-danger form-control">
