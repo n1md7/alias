@@ -1,0 +1,88 @@
+@font-face {
+    font-family: kafont;
+    src: url('../fonts/fontka.ttf');
+}
+.title {
+	font-family: 'Monoton', cursive;
+}
+.title-logo {
+    font-size: 2.2em;
+}
+.hidden{
+	display: none;
+}
+.overflow-auto{
+	overflow: auto;
+}
+.lang{
+	font-family: 'kafont';
+}
+
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+                               /*touch-action: none;*/
+}
+
+body{
+	touch-action: none;
+}
+.form-control:focus{
+	box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.19);
+}
+
+input::selection {
+  background: #dc3545; /* WebKit/Blink Browsers */
+  color: white;
+}
+
+input::-moz-selection {
+  background: #dc3545; /* Gecko Browsers */
+  color: white;
+}
+
+.font-sm{
+	font-size: 12px;
+}
+
+.ui-selectmenu-button-text{
+	display: none;
+}
+
+.overme {
+    width: 100%;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+}
+.overme-7 {
+    width: 70%;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+}
+
+.swal-text{
+  text-align: center;
+}
+
+.js-timer{
+  font-size: 3em !important;
+}
+
+.team-playing-area{
+  transition: all 0.25s;
+}
+
+.bg-danger-light{
+  background: #ff808c;
+}
+
+.bg-success-light{
+  background: #a9ff80;
+}
