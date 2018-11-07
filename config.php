@@ -13,14 +13,14 @@
 		@DB_NAME - db name
 	*/
 	define("DB_HOST", "localhost");
-	define("DB_USER", "root");  
-	define("DB_PASS", "A0a1s2d3f4g5h6"); 
+	define("DB_USER", "admin_alias");  
+	define("DB_PASS", "XSlESquwpM"); 
 	define("DB_NAME", "admin_alias");
 
 	/*
 		root path for webpage
 	*/
-	define("ROOT_PATH", "/alias/");
+	define("ROOT_PATH", "/");
 
 	/*
 		Root url for webpage
