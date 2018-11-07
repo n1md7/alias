@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+		<meta name="theme-color" content="#dc3545">
+		<meta name="description" content="alias, a board game">
+		<meta name="keywords" content="alias, game, board, cards, mobile, online">
+		<meta name="author" content="Harry Kodua">
+		<meta property="og:title" content="alias, a board game">
+		<meta property="og:description" content="alias, a board game">
+		<meta property="og:image" content="logo.png">
+		<link rel="shortcut icon" href="logo.png">
+		<meta name="theme-color" content="#dc3545">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="./assets/css/md.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css?v=<?php echo VERSION; ?>">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css?v=<?php echo VERSION; ?>">
+		<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+		<link rel="stylesheet" href="./assets/css/fonts-awesome/css/font-awesome.min.css?v=<?php echo VERSION; ?>">
+		<link rel="stylesheet" href="./assets/css/main.css?v=<?php echo VERSION; ?>">
+		<title>Alias</title>
+	</head>
+	<body data-url="<?php echo ROOT_URL; ?>" class="position-fixed border border-danger h-100 w-100">
+	
+		<!-- sound area -->
+			<audio preload="auto" id="button_click"><source src="./assets/sounds/button_click.mp3" type="audio/mpeg"></audio>
+			<audio preload="auto" id="wrong_click"><source src="./assets/sounds/wrong_click.mp3" type="audio/mpeg"></audio>
+			<audio preload="auto" id="correct_click"><source src="./assets/sounds/correct_click.mp3" type="audio/mpeg"></audio>
+			<audio preload="auto" id="beep"><source src="./assets/sounds/beep.mp3" type="audio/mpeg"></audio>
+			<audio preload="auto" id="win_sound"><source src="./assets/sounds/win.mp3" type="audio/mpeg"></audio>
+
+		<!-- end of sound area -->
+
+
+
+		<div class="text-center mt-5 spinner">
+			<div class="row m-0 p-0 mt-2">
+				<div class="mb-3 col col-12 text-center">
+					<h5 class="text-danger">
+						<span class="text-uppercase" style="color:#dc3545!important;">Loading...</span>
+					</h5>
+				</div>
+				<div class="col col-12">
+					<i class="fa fa-spinner fa-spin fa-3x fa-fw text-danger"></i>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid p-0 m-0">
+			<!-- init area -->
+			<div class="init-area animated bounceInLeft w-100 hidden">
+				<div class="mt-3 row justify-content-center ">
+					<div class="col col-12 text-center text-danger">
+						<button data-toggle="modal" data-target="#langChangeModal" class="langChangeModal btn btn-xs btn-danger"><span class="lang TEXT_CURRENT_LANG">...</span> <span class="fa fa-arrow-down"></span></button>
+					</div>
+				</div>
+				
+				<div class="mt-2 mb-5 row justify-content-center">
+					<div class="col col-auto text-center text-danger">
+						<h1><i class="fa fa-gamepad title-logo" aria-hidden="true"></i></h1>
+						<h1 class="text-danger title">ALIAS</h1>
+					</div>
+				</div>
+				
+				<!-- action buttons parts -->
+				<div class="start-buttons-area">
+					<div class="mt-5 row justify-content-center ">
+						<div class="col col-12 text-center text-danger">
+							<span class="font-weight-bold lang TEXT_WELCOME">...</span>
+						</div>
+					</div>
+					<div class="mt-5 row justify-content-center ">
+						<div class="col col-12 text-center text-danger">
+							<button id="gameStart" type="button" class="btn btn-danger btn-lg w-100 rounded-0 m-0">
+							<i class="fa fa-play" aria-hidden="true"></i>
+							<span class="lang TEXT_START">...</span>
+							</button>
+						</div>
+					</div>
+					<div class="mt-1 row justify-content-center">
+						<div class="col col-12 text-center text-danger">
+							<button type="button" id="rules-btn" class="btn btn-outline-danger btn-lg w-100 rounded-0 m-0"><i class="fa fa-file-text-o" aria-hidden="true"></i>
+							<span class="lang TEXT_RULES">...</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end of init area -->
+			
+			<!-- rules area -->
+			<div class="rules-area hidden overflow-auto mb-5 h-100 position-fixed fixed-top animated">
+				<div class="mt-1 row mx-0 justify-content-center ">
+					<div class="col col-12 text-center text-danger px-0">
+						<h1 class="lang TITLE_GENERAL_RULES">...</h1>
+						<span class="font-weight-bold lang TEXT_GENERAL_RULES">...</span>
+						<button class="btn btn-danger btn-lg form-control m-0 rounded-0 mt-5" id="from-rules-go-back">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i> <span class="lang TEXT_BACK">...</span>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- end if the rules area -->
+			
+			<!--Modal: langChangeModal for Language-->
+			<div class="modal fade top" id="langChangeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+				data-backdrop="false">
+				<div class="modal-dialog modal-frame modal-top modal-notify modal-info m-0" role="document">
+					<!--Content-->
+					<div class="modal-content">
+						<!--Body-->
+						<div class="modal-body">
+							<div class="row d-flex justify-content-center align-items-center">
+								<div class="col col-12">
+									<h2 class="lang TEXT_CHOOSE_INTERFACE_LANG text-center text-danger"></h2>
+								</div>
+								<div class="col col-12 text-center">
+									<button class="btn btn-xs btn-danger mx-auto" id="lang_en">English</button>
+									<button class="btn btn-xs btn-danger lang mx-auto" id="lang_ka">ქართული</button>
+									<button class="btn btn-xs btn-danger lang mx-auto" id="lang_me">მეგრული</button>
+								</div>
+								<hr class="w-100">
+								<button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal"> <span class="fa fa-close"></span> <span class="lang TEXT_CLOSE">...</span></button>
+							</div>
+						</div>
+					</div>
+					<!--/.Content-->
+				</div>
+			</div>
+			<!--Modal: langChangeModal for language-->
+
+			<!--Modal: scoreBoardModal for Language-->
+			<div class="modal fade top" id="scoreBoardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+				data-backdrop="false">
+				<div class="modal-dialog modal-frame modal-top modal-notify modal-info m-0" role="document">
+					<!--Content-->
+					<div class="modal-content">
+						<!--Body-->
+						<div class="modal-body px-0 pb-0">
+							<div class="row mx-0 d-flex justify-content-center align-items-center">
+								<h2 class="lang TEXT_SCORE_BOARD text-center text-danger"></h2>
+								<div id="scoreBoard" class="scoreBoard row w-100 mx-0 p-0 d-flex justify-content-center align-items-center">
+									<!-- teams data goes here -->
+								</div>
+								<div class="row w-100 mx-0 p-0 d-flex justify-content-center align-items-center">
+									<div class="col col-12 text-center">
+										<button class="btn btn-danger btn-sm py-1 px-2 mt-4" data-dismiss="modal"><span class="fa fa-close"> </span> <span class="lang TEXT_CLOSE"></span></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--/.Content-->
+				</div>
+			</div>
+			<!--Modal: scoreBoardModal for language-->
+
+			<!-- game options area -->
+			<div class="hidden w-100 h-100 game-options h-100 position-fixed fixed-top overflow-auto animated">
+				
+				<div class="row mt-3 justify-content-center p-0 m-0">
+					<div class="col col-12 text-center text-danger p-0 m-0">
+						<h1 class="lang TEXT_SETUP">...</h1>
+						
+						<button class="btn btn-sm btn-danger py-1 px-2" id="js-back-options-main">
+							<i class="fa fa-chevron-left"></i>
+							<span class="lang TEXT_BACK"></span>
+						</button>
+
+						<button data-toggle="collapse" href="#collapsePoints" role="button" aria-expanded="false" aria-controls="collapsePoints" class="js-click-btn btn btn-outline-danger waves-effect btn-lg w-100 m-0 rounded-0 mt-2 mb-1"><span class="fa fa-star"></span> <span class="lang TEXT_POINTS">...</span> <span class="badge badge-danger js-max-points-counter">25</span></button>
+						<div class="collapse multi-collapse" id="collapsePoints">
+							<div class="py-4 px-2">
+								<div class="row mx-0">
+									<div class="col col-12">
+										<h5 class="lang TEXT_MAX_POINTS_EXPLAIN">...</h5>
+										<div class="text-left">
+											<span class="font-italic lang TEXT_MAX_POINTS_DESCRIPTION text-capitalize font-sm">...</span>
+											<span id="js-max-points" class="font-weight-bold">...</span>
+										</div>
+										<input type="number" id="maxPoints" class="font-weight-bold w-100 mb-3 form-control text-danger border-danger rounded-0" value="25" min="5" max="200" maxlength="3">
+									</div>
+								</div>
+								<div class="row d-flex justify-content-center align-items-center mx-0">
+									<div class="col col-3 ">
+										<button type="button" data-value="25" class="btn js-btn-max-pts btn-danger w-100 rounded-0 m-0">25</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="50" class="btn js-btn-max-pts btn-danger w-100 rounded-0 m-0">50</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="75" class="btn js-btn-max-pts btn-danger w-100 rounded-0 m-0">75</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="100" class="px-0 text-center btn js-btn-max-pts btn-danger w-100 rounded-0 m-0">100</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button data-toggle="collapse" href="#collapseDuration" role="button" aria-expanded="false" aria-controls="collapseDuration" class="js-click-btn btn btn-outline-danger waves-effect btn-lg w-100 m-0 rounded-0 mb-1"><span class="fa fa-tachometer"> <span class="lang TEXT_MAX_ROUNDS">...</span> <span class="badge badge-danger js-max-duration-counter">5</span></button>
+						<div class="collapse multi-collapse" id="collapseDuration">
+							<div class="py-4 px-2">
+								<div class="row mx-0">
+									<div class="col col-12">
+										<h5 class="lang TEXT_ROUND_TEXT_EXPLAIN">...</h5>
+										<div class="text-left">
+											<span class="font-italic lang TEXT_MAX_ROUNDS_DESCRIPTION text-capitalize font-sm">...</span>
+											<span id="js-max-rounds" class="font-weight-bold">...</span>
+										</div>
+										<input type="number" id="maxDuration" class="font-weight-bold w-100 mb-3 form-control text-danger border-danger rounded-0" value="5" min="5" max="200" maxlength="3">
+									</div>
+								</div>
+								<div class="row d-flex justify-content-center align-items-center mx-0">
+									<div class="col col-3 ">
+										<button type="button" data-value="5" class="btn js-btn-duration btn-danger w-100 rounded-0 m-0">5</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="10" class="btn js-btn-duration btn-danger w-100 rounded-0 m-0">10</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="20" class="btn js-btn-duration btn-danger w-100 rounded-0 m-0">20</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="40" class="btn js-btn-duration btn-danger w-100 rounded-0 m-0">40</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- duration seconds -->
+						<button data-toggle="collapse" href="#collapseDurationSeconds" role="button" aria-expanded="false" aria-controls="collapseDurationSeconds" class="js-click-btn btn btn-outline-danger waves-effect btn-lg w-100 m-0 rounded-0 mb-1"><span class="fa fa-clock-o"> <span class="lang TEXT_DURATION">...</span> <span class="badge badge-danger js-max-duration-seconds-counter">20</span></button>
+						<div class="collapse multi-collapse" id="collapseDurationSeconds">
+							<div class="py-4 px-2">
+								<div class="row mx-0">
+									<div class="col col-12">
+										<h5 class="lang TEXT_DURATION_TEXT_EXPLAIN">...</h5>
+										<div class="text-left">
+											<span class="font-italic lang TEXT_MAX_DURATIONS_DESCRIPTION text-capitalize font-sm">...</span>
+											<span id="js-max-seconds" class="font-weight-bold">...</span>
+										</div>
+										<input type="number" id="maxDurationSeconds" class="font-weight-bold w-100 mb-3 form-control text-danger border-danger rounded-0" value="20" min="5" max="200" maxlength="3">
+									</div>
+								</div>
+								<div class="row d-flex justify-content-center align-items-center mx-0">
+									<div class="col col-3 ">
+										<button type="button" data-value="20" class="btn js-btn-duration-seconds btn-danger w-100 rounded-0 m-0">20</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="30" class="btn js-btn-duration-seconds btn-danger w-100 rounded-0 m-0">30</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="50" class="btn js-btn-duration-seconds btn-danger w-100 rounded-0 m-0">50</button>
+									</div>
+									<div class="col col-3 ">
+										<button type="button" data-value="60" class="btn js-btn-duration-seconds btn-danger w-100 rounded-0 m-0">60</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- edn duration seconds -->
+						<button data-toggle="collapse" href="#collapseTeams" role="button" aria-expanded="false" aria-controls="collapseTeams" class="js-click-btn btn btn-outline-danger waves-effect btn-lg w-100 m-0 rounded-0 mb-1"><span class="fa fa-users"> <span class="lang TEXT_TEAMS">...</span> <span class="badge badge-danger js-teams-counter">2</span></button>
+						<div class="collapse multi-collapse" id="collapseTeams">
+							<div class="px-2 py-4">
+								<div class="row mx-0">
+									<div class="col col-12">
+										<h5 class="lang TEXT_TEAMS_EXPLAIN">...</h5>
+									</div>
+									<form class="w-100 m-0 p-0">
+										<div class="col col-12 js-team-names-div">
+											<select id="teamCount" class="font-weight-bold col col-12 form-control mt-3 rounded-0 border-danger text-danger">
+												<option value="2" selected="true">2</option>
+											</select>
+											<input type="text" class="font-weight-bold js-team-name w-100 mt-3 form-control rounded-0 border-danger text-danger lang TEXT_TEAM1" value="...">
+											<input type="text" class="font-weight-bold js-team-name w-100 mt-3 form-control rounded-0 border-danger text-danger lang TEXT_TEAM2" value="...">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<button data-toggle="collapse" href="#collapseDicts" role="button" aria-expanded="false" aria-controls="collapseDicts" class="js-click-btn btn btn-outline-danger waves-effect btn-lg w-100 m-0 rounded-0 mb-1"><span class="fa fa-book"> <span class="lang TEXT_WORDS">...</span> <span class="badge badge-danger js-dict-name">random</span></button>
+						<div class="collapse multi-collapse" id="collapseDicts">
+							<div class="px-2 py-4">
+								<div class="row mx-0">
+									<div class="col col-12">
+										<h5 class="lang TEXT_DICT_EXPLAIN">...</h5>
+									</div>
+									<div class="col col-12 js-dict-names-div">
+										<!-- Cat button goes here -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-danger btn-lg w-100 m-0 rounded-0 mt-2" id="js-start2game-area">
+						<span class="fa fa-play"></span> <span class="lang TEXT_START_GAME">...</span></button>
+					</div>
+				</div>
+			</div>
+			<!-- end of game options area -->
+
+			<!-- Game actual playing area -->
+			<div class="hidden w-100 h-100 game-playing-area h-100 position-fixed fixed-top overflow-auto animated">
+				<div class="row mt-3 justify-content-center p-0 m-0">
+					<div class="col col-12 text-center mt-5 text-danger p-0">
+						<h1><i class="fa fa-gamepad title-logo" aria-hidden="true"></i></h1>
+						<h1 class="text-danger title mb-4">ALIAS</h1>
+						<h5 class="my-2"><span class="lang TEXT_ROUND"></span> <span id="js-round-text"></span></h5>
+						<h5 class="my-2"><span class="lang TEXT_TEAM"></span> <span class="js-team-name-text lang font-weight-bold"></span></h5>
+						<button id="startRound" class="mt-4 mb-1 btn btn-lg btn-danger rounded-0 w-100 mx-0"><i class="fa fa-play"></i> <span class="lang TEXT_START">...</span></button>
+						<button data-toggle="modal" data-target="#scoreBoardModal" class="scoreBoardModal btn btn-lg btn-outline-danger rounded-0 w-100 mx-0"><i class="fa fa-trophy"></i> <span class="lang TEXT_SCORE_BOARD">...</span></button>
+						<a href="javascript:void(0)" class="text-danger mt-4 d-block js-reset-game"><i class="fa fa-refresh"></i> <span class="lang TEXT_RESET_GAME">...</span></a>
+					</div>
+				</div>
+			</div>
+			<!-- end of the Game actual playing area -->
+
+			<!-- Team playing area -->
+			<div class="hidden w-100 h-100 team-playing-area h-100 position-fixed fixed-top overflow-auto animated">
+				<div class="row mt-3 justify-content-center p-0 m-0">
+					<div class="col col-12 text-center mt-5 text-danger p-0">
+						<h2>
+							<span class="lang TEXT_ROUND"></span>
+							<span class="js-team-round-updater">...</span>
+						</h2>
+						<h2>
+							<span class="lang TEXT_TEAM"></span>
+							<span class="js-team-name-updater lang">...</span>
+						</h2>
+					</div>
+					<div class="col col-6 text-center text-danger p-0">
+						<h1>
+							<span id="js-timer" class="js-timer font-weight-bold lang">60</span>
+						</h1>
+					</div>
+					<!-- word goes here -->
+					<div class="col col-12 my-2 mb-5 text-center text-danger p-0">
+						<h1 class="overme">
+							<span id="js-word" class="js-word font-weight-bold lang text-center">...</span>
+						</h1>
+					</div>
+					<div class="col col-12 text-center text-danger clearfix">
+						<button class="btn btn-success btn-lg float-right js-correct"><span class="fa fa-angle-double-right"></span></button>
+						<button class="btn btn-danger btn-lg float-left js-wrong"><span class="fa fa-close"></span></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- End of the Team playing area -->
+
+		</div>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script>
+			const langs = JSON.parse(`<?php echo $GLOBALS["lang_content"]; ?>`);
+		</script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="http://code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+		<script src="./assets/js/md.js?v=<?php echo VERSION; ?>"></script>
+		<script src="./assets/js/config.js?v=<?php echo VERSION; ?>"></script>
+		<script src="./assets/js/functions.js?v=<?php echo VERSION; ?>"></script>
+		<script src="./assets/js/teams.js?v=<?php echo VERSION; ?>"></script>
+		<script src="./assets/js/main.js?v=<?php echo VERSION; ?>"></script>
+		<script src="./assets/js/lang.js?v=<?php echo VERSION; ?>"></script>
+		<!-- later php should translate in the begining -->
+		<script>translate();</script>
+		<script>
+			// $('#scoreBoardModal').modal('show')
+
+			window.onbeforeunload = function() {
+				if(['gamePlayingArea', 'options', 'teamPlayingArea'].indexOf(game.visible.tab) !== -1 && !game.refreshing)
+		    	return 'Are you sure you want to reload?'
+			};
+
+			$(document).ready(function () {
+				//Disable full page
+				$("body").on("contextmenu", function(e){
+					return false;
+				});
+
+				$('body').bind('cut copy paste', function (e) {
+						e.preventDefault();
+				});
+			});
+		</script>
+			<script>
+				if(undefined === cookie.get('msg')){
+					swal('info','This is a mobile game. Please use mobile device for a better experience','info')
+					cookie.set('msg','true', 999);
+				}
+		</script>
+	</body>
+</html>

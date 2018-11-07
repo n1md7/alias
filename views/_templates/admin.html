@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#8e9091">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/md.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css?v=<?php echo VERSION; ?>">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton" >
+		<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/fonts-awesome/css/font-awesome.min.css?v=<?php echo VERSION; ?>">
+		<link rel="stylesheet" href="<?php echo ROOT_PATH; ?>assets/css/admin_main.css?v=<?php echo VERSION; ?>">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js?v=<?php echo VERSION; ?>"></script>
+		<title>Alias</title>
+	</head>
+	<body data-url="<?php echo ROOT_PATH; ?>" class="bg-body">
+		
+		<div class="container-fluid">
+			<?php Messages::display(); ?>
+			<?php require('./views/_templates/admin_nav.html'); ?>
+
+			<?php require($view); ?>
+
+			<!-- footer start -->
+			<!-- footer end -->
+
+			<?php require('./views/footer.html'); ?>
+	    </div>			
+	
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js?v=<?php echo VERSION; ?>"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+		<script src="<?php echo ROOT_PATH; ?>assets/js/md.js?v=<?php echo VERSION; ?>"></script>
+		
+	</body>
+</html>
